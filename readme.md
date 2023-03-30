@@ -18,11 +18,9 @@ from libllama import LibLLaMA
 lib_path = 'path/to/libllama.so'
 weights_path = 'path/to/weights'
 
-lib = LibLLaMA(lib_path)
-
 prompt = "Here is how to build a python web server in 3 steps:\n"
 
-with lib.llama_init_from_file(weights_path) as ctx:
+with LibLLaMA(lib_path).llama_init_from_file(weights_path) as ctx:
     initial_prompt = ctx.llama_tokenize(prompt.encode("utf-8"), add_bos=True)
 
     for i, token in enumerate(initial_prompt):
