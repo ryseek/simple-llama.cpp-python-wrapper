@@ -1,4 +1,4 @@
-# Simple llama.cpp Python Wrapper
+# Simple [llama.cpp](https://github.com/ggerganov/llama.cpp) Python Wrapper
 This is a python wrapper around the LLama library, providing an easier-to-use API for accessing LLama's functionality.
 
 ## Installation
@@ -47,7 +47,7 @@ with lib.llama_init_from_file(weights_path) as ctx:
         ctx.llama_eval([prediction], len(last_n_tokens) - 1)
 ```
 
-The output of gpt4all model:
+The output of [gpt4all](https://github.com/nomic-ai/gpt4all) model:
 ```
 Here is how to build a python web server in 3 steps:
 
