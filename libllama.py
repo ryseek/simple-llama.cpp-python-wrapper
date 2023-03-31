@@ -23,10 +23,12 @@ class LLaMAContext:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
 
-    def close(self):
+    def free(self):
         if self._ctx is not None:
-            self._llama.llama_free(self._ctx)
+            self._llama.llama_free(self._ctx) # this will delete the context
 
+    def close(self):
+        self.free()
         self._ctx = None
         self._llama = None
 
@@ -102,7 +104,6 @@ class LibLLaMA:
             ctypes.c_int,     # const int           n_past,
             ctypes.c_int      # const int           n_threads
         ]
-
         self._llama.llama_eval.restype = ctypes.c_int
 
         self._llama.llama_tokenize.argtypes = [
@@ -112,7 +113,6 @@ class LibLLaMA:
             ctypes.c_int,     # int                    n_max_tokens
             ctypes.c_bool     # bool                   add_bos
         ]
-
         self._llama.llama_tokenize.restype = ctypes.c_int
 
         self._llama.llama_n_vocab.argtypes = [llama_context_p]
